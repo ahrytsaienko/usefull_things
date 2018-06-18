@@ -59,7 +59,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(evil-smartparens flycheck-joker)
+   dotspacemacs-additional-packages '(evil-smartparens
+                                      flycheck-joker
+                                      ripgrep
+                                      rg)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -137,6 +140,48 @@ values."
                          github
                          spacemacs-light
                          spacemacs-dark)
+    theming-modifications '((leuven
+                            (default :background "#F7F7F7" :foreground "#333")
+                            (font-lock-builtin-face :foreground "#333")
+                            (font-lock-type-face :foreground nil)          ;; namespaces
+                            (font-lock-keyword-face :foreground nil)       ;; def
+                            (font-lock-preprocessor-face :foreground nil)  ;; interop
+                            (cursor :foreground "#007ACC" :background "#007ACC")
+                            (hl-line :background "#F0F0F0")
+
+                            (helm-selection :background "#BFDBFE")
+                            (region :background "#BFDBFE")
+
+                            (iserach :background "#FFE9A6")
+                            (lazy-highlight :background "#FFBC5D")
+                            (evil-ex-substitute-matches :background "#FFBC5D")
+                            (evil-ex-substitute-replacement :background "#FFE9A6")
+                            (evil-search-highlight-persist-highlight-face :background "#FFE9A6")
+                            (ahs-face :background "#FFE9A6")
+                            (ahs-plugin-whole-buffer-face :background "#FFBC5D")
+                            ;; TODO: parens and other punctuation
+                            (show-paren-match :foreground "#AA3731" :background nil)
+
+                            ;; Strings
+                            (font-lock-string-face :foreground "#448C27")
+                            (font-lock-doc-face :foreground "#448C27")
+                            (bold :foreground "#777777" :weight normal)  ;; clojure string escape sequence
+
+                            ;; All statically known constants (numbers, symbols, keywords, booleans)
+                            (font-lock-constant-face :foreground "#7A3E9D")  ;; keywords
+                            (clojure-keyword-face :foreground "#7A3E9D")
+                            (highlight-numbers-number :foreground "#7A3E9D")
+
+                            ;; Comments
+                            (font-lock-comment-face :foreground "#AA3731"
+                                                    :slant normal)
+                            (font-lock-comment-delimiter-face :foreground "#AA3731")
+                            (hl-todo :foreground "#AA3731")
+
+                            ;; Global definitions
+                            (font-lock-function-name-face :foreground "#325CC0")
+                            (font-lock-variable-name-face :foreground "#325CC0")
+                            ))
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -289,7 +334,9 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   ;;dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   ;;dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -471,7 +518,7 @@ you should place your code here."
     ("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d")))
  '(package-selected-packages
    (quote
-    (autumn-light-theme avk-emacs-themes firecode-theme abyss-theme w3 atom-one-dark-theme darcula-theme github-theme-theme cl-format pretty-mode zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme color-theme-solarized-theme solarized-height-plus-4-theme solarized-theme-theme color-theme-solarized color-theme-sanityinc-tomorrow git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter company-ebdb ac-cider magithub diff-hl zenburn-theme django-theme jazz-theme basic-theme color-theme github-modern-theme-theme github-modern-theme solarized-theme color-theme-sanityinc-solarized github-theme leuven-theme web-mode tagedit slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary less-css-mode launchctl helm-css-scss haml-mode emmet-mode company-web web-completion-data flycheck-joker flycheck evil-smartparens parinfer sql-indent smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit magit-popup git-commit ghub let-alist with-editor company-statistics company clojure-snippets clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider seq queue clojure-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (atom-dark-theme projectile-ripgrep ripgrep rg helm-rg autumn-light-theme avk-emacs-themes firecode-theme abyss-theme w3 atom-one-dark-theme darcula-theme github-theme-theme cl-format pretty-mode zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme color-theme-solarized-theme solarized-height-plus-4-theme solarized-theme-theme color-theme-solarized color-theme-sanityinc-tomorrow git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter company-ebdb ac-cider magithub diff-hl zenburn-theme django-theme jazz-theme basic-theme color-theme github-modern-theme-theme github-modern-theme solarized-theme color-theme-sanityinc-solarized github-theme leuven-theme web-mode tagedit slim-mode scss-mode sass-mode reveal-in-osx-finder pug-mode pbcopy osx-trash osx-dictionary less-css-mode launchctl helm-css-scss haml-mode emmet-mode company-web web-completion-data flycheck-joker flycheck evil-smartparens parinfer sql-indent smeargle orgit mmm-mode markdown-toc markdown-mode magit-gitflow helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit magit-popup git-commit ghub let-alist with-editor company-statistics company clojure-snippets clj-refactor inflections edn multiple-cursors paredit peg cider-eval-sexp-fu cider seq queue clojure-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
@@ -513,4 +560,31 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "nil" :slant normal :weight normal :height 140 :width normal)))))
+ '(default ((t (:family "Fira Code" :foundry "nil" :slant normal :weight normal :height 140 :width normal))))
+ '(ahs-face ((t (:background "#FFE9A6"))))
+ '(ahs-plugin-whole-buffer-face ((t (:background "#FFBC5D"))))
+ '(bold ((t (:foreground "#777777" :weight normal))))
+ '(clojure-keyword-face ((t (:foreground "#7A3E9D"))))
+ '(cursor ((t (:foreground "#007ACC" :background "#007ACC"))))
+ '(evil-ex-substitute-matches ((t (:background "#FFBC5D"))))
+ '(evil-ex-substitute-replacement ((t (:background "#FFE9A6"))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "#FFE9A6"))))
+ '(font-lock-builtin-face ((t (:foreground "#333"))))
+ '(font-lock-comment-delimiter-face ((t (:foreground "#AA3731"))))
+ '(font-lock-comment-face ((t (:foreground "#AA3731" :slant normal))))
+ '(font-lock-constant-face ((t (:foreground "#7A3E9D"))))
+ '(font-lock-doc-face ((t (:foreground "#448C27"))))
+ '(font-lock-function-name-face ((t (:foreground "#325CC0"))))
+ '(font-lock-keyword-face ((t (:foreground nil))))
+ '(font-lock-preprocessor-face ((t (:foreground nil))))
+ '(font-lock-string-face ((t (:foreground "#448C27"))))
+ '(font-lock-type-face ((t (:foreground nil))))
+ '(font-lock-variable-name-face ((t (:foreground "#325CC0"))))
+ '(helm-selection ((t (:background "#BFDBFE"))))
+ '(highlight-numbers-number ((t (:foreground "#7A3E9D"))))
+ '(hl-line ((t (:background "#F0F0F0"))))
+ '(hl-todo ((t (:foreground "#AA3731"))))
+ '(iserach ((t (:background "#FFE9A6"))))
+ '(lazy-highlight ((t (:background "#FFBC5D"))))
+ '(region ((t (:background "#BFDBFE"))))
+ '(show-paren-match ((t (:foreground "#AA3731" :background nil)))))
